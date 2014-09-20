@@ -184,3 +184,20 @@ class CallbackWrapper(CallbackProxy, AbstractWrapper):
 
 class LazyWrapper(LazyProxy, AbstractWrapper):
     __slots__ = ()
+
+
+def lazymethod(method):
+    """
+    Decorator for overriding methods on LazyWrapper classes, that fill in until
+    lazy initialization.
+    """
+    import functools
+    @functools.wraps(method)
+    def wrapper(self, *args, **kwargs):
+        try:
+            get_cache(self)
+        except AttributeError:
+            return method(self, *args, **kwargs)
+        else:
+            return getattr(self.__subject__, method.__name__)(*args, **kwargs)
+    return wrapper

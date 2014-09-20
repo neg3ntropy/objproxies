@@ -242,6 +242,44 @@ The ``CallbackWrapper`` and ``LazyWrapper`` base classes are basically the same
 as ``ObjectWrapper``, except that they use a callback or cached lazy callback
 instead of expecting an object as their subject.
 
+``LazyWrapper`` objects are particularly useful when working with expensive
+resources, like connections or web browsers, to avoid their creation unless
+absolutely needed. However resources usually must be released after use by
+calling a "``close``" method of some sort. In this case the lazy creation could
+be triggered just when the object is not needed anymore, by the call to
+``close`` itself. For this reason when extending ``LazyWrapper`` these methods
+can be overridden with a ``@lazymethod`` replacement::
+
+    >>> from objproxies import LazyWrapper, lazymethod
+
+    >>> class LazyCloseable(LazyWrapper):
+    ...     @lazymethod
+    ...     def tell(self):
+    ...         return 0
+    ...     @lazymethod
+    ...     def close(self):
+    ...         print("bye")
+
+    >>> import tempfile
+
+    >>> def openf():
+    ...     print("called")
+    ...     return tempfile.TemporaryFile('w')
+
+    >>> lazyfile = LazyCloseable(openf)
+    >>> lazyfile.tell()
+    0
+    >>> lazyfile.close()
+    bye
+
+    >>> lazyfile = LazyCloseable(openf)
+    >>> lazyfile.write('wake up')
+    called
+    7
+    >>> lazyfile.tell()
+    7
+    >>> lazyfile.close()  # close for real
+
 Creating Custom Subclasses and Mixins
 *************************************
 
