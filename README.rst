@@ -18,9 +18,9 @@ be able to hand out "forward reference" proxies.)
 Development status
 ******************
 
-At the moment this is a straightforward Python 3 port of `ProxyTypes
-<http://cheeseshop.python.org/pypi/ProxyTypes>`_ wrote by Phillip J. Eby for
-a part of `PEAK <http://www.eby-sarna.com/mailman/listinfo/peak>`_.
+This is Python 3 port of `ProxyTypes
+<http://cheeseshop.python.org/pypi/ProxyTypes>`_ wrote by Phillip J. Eby for a
+part of `PEAK <http://www.eby-sarna.com/mailman/listinfo/peak>`_.
 
 The namespace was changed from ``peak.util.proxies`` to ``objproxies``. Other
 than that it should be a compatible replacement.
@@ -31,15 +31,30 @@ So far the following was accomplished:
 * Ported unittests and doctests
 * Cleaned up syntax
 
-TODO
-++++
+v1.0 TODO
++++++++++
 
-* Add test for the various Wrappers
 * Turn the module in a package, separate functionalities in different modules
-* Make sure that any new Python 3 magic method is supported
 * Simplify code wherever possible
+* Get positive feedback from a couple of users
 
 Contributions and bug reports are welcome.
+
+Testing
++++++++
+
+When nose is available all tests can be run using:
+
+.. code:: bash
+
+    nosetests3 --with-doctest  --doctest-extension=rst .
+
+Otherwise standard python will suffice:
+
+.. code:: bash
+
+    python -m unittest objproxies_tests.py
+    python -m doctest README.rst
 
 Proxy Basics
 ************
