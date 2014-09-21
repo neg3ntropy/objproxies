@@ -5,7 +5,7 @@ from os.path import join, dirname
 
 setuptools.setup(
     name="objproxies",
-    version="0.9.2",
+    version="0.9.3",
     description="General purpose proxy and wrapper types",
     long_description=open(join(dirname(__file__), 'README.rst')).read(),
     url="http://github.com/soulrebel/objproxies",
