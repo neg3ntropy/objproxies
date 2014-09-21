@@ -176,7 +176,7 @@ and ``set_callback`` functions::
 Lazy Proxies
 ************
 
-A ``LazyProxy`` is similar to a ``DynamicProxy``, but its callback is called
+A ``LazyProxy`` is similar to a ``CallbackProxy``, but its callback is called
 at most once, and then cached::
 
     >>> from objproxies import LazyProxy
@@ -259,11 +259,13 @@ instead of expecting an object as their subject.
 
 ``LazyWrapper`` objects are particularly useful when working with expensive
 resources, like connections or web browsers, to avoid their creation unless
-absolutely needed. However resources usually must be released after use by
-calling a "``close``" method of some sort. In this case the lazy creation could
-be triggered just when the object is not needed anymore, by the call to
-``close`` itself. For this reason when extending ``LazyWrapper`` these methods
-can be overridden with a ``@lazymethod`` replacement::
+absolutely needed. 
+
+However resources usually must be released after use by calling a "``close``"
+method of some sort. In this case the lazy creation could be triggered just
+when the object is not needed anymore, by the call to ``close`` itself. For
+this reason when extending ``LazyWrapper`` these methods can be overridden with
+a ``@lazymethod`` replacement::
 
     >>> from objproxies import LazyWrapper, lazymethod
 
@@ -302,8 +304,8 @@ can be overridden with a ``@lazymethod`` replacement::
     >>> bool(lazyfile)
     True
 
-Creating Custom Subclasses and Mixins
-*************************************
+Advanced: Custom subclasses and mixins
+**************************************
 
 In addition to all the concrete classes described above, there are also two
 abstract base classes: ``AbstractProxy`` and ``AbstractWrapper``.  If you want
