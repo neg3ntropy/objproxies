@@ -259,6 +259,9 @@ can be overridden with a ``@lazymethod`` replacement::
     ...     @lazymethod
     ...     def close(self):
     ...         print("bye")
+    ...     @lazymethod
+    ...     def __bool__(self):
+    ...         return False
 
     >>> import tempfile
 
@@ -271,6 +274,8 @@ can be overridden with a ``@lazymethod`` replacement::
     0
     >>> lazyfile.close()
     bye
+    >>> bool(lazyfile)
+    False
 
     >>> lazyfile = LazyCloseable(openf)
     >>> lazyfile.write('wake up')
@@ -279,6 +284,8 @@ can be overridden with a ``@lazymethod`` replacement::
     >>> lazyfile.tell()
     7
     >>> lazyfile.close()  # close for real
+    >>> bool(lazyfile)
+    True
 
 Creating Custom Subclasses and Mixins
 *************************************

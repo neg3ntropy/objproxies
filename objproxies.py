@@ -185,7 +185,6 @@ class CallbackWrapper(CallbackProxy, AbstractWrapper):
 class LazyWrapper(LazyProxy, AbstractWrapper):
     __slots__ = ()
 
-
 def lazymethod(method):
     """
     Decorator for overriding methods on LazyWrapper classes, that fill in until
@@ -199,5 +198,8 @@ def lazymethod(method):
         except AttributeError:
             return method(self, *args, **kwargs)
         else:
-            return getattr(self.__subject__, method.__name__)(*args, **kwargs)
+            if method.__name__.startswith('__'):
+                return getattr(LazyProxy, method.__name__)(self, *args, **kwargs)
+            else:
+                return getattr(self.__subject__, method.__name__)(*args, **kwargs)
     return wrapper
