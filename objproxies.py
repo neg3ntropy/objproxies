@@ -1,3 +1,11 @@
+import sys
+
+if sys.version_info.major < 3:
+    raise ImportError(
+            'objproxies requires Python 3. For Python 2, refer to ProxyTypes '
+            '<http://cheeseshop.python.org/pypi/ProxyTypes>')
+
+
 class AbstractProxy(object):
     """Delegates all operations (except ``.__subject__``) to another object"""
     __slots__ = ()
