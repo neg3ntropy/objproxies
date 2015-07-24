@@ -2,14 +2,14 @@ Simple Proxy Types
 ==================
 
 The ``objproxies`` module provides some useful base classes for creating
-proxies and wrappers for ordinary Python objects.  Proxy objects automatically
-delegate all attribute access and operations to the proxied object.  Wrappers
+proxies and wrappers for ordinary Python objects. Proxy objects automatically
+delegate all attribute access and operations to the proxied object. Wrappers
 are similar, but can be subclassed to allow additional attributes and
 operations to be added to the wrapped object.
 
 Note that these proxy types are not intended to be tamper-proof; the unproxied
 form of an object can be readily accessed using a proxy's ``__subject__``
-attribute, and some proxy types even allow this attribute to be set.  (This can
+attribute, and some proxy types even allow this attribute to be set (This can
 be handy for algorithms that lazily create circular structures and thus need to
 be able to hand out "forward reference" proxies.)
 
@@ -19,8 +19,8 @@ Development status
 ******************
 
 This is Python 3 port of `ProxyTypes
-<http://cheeseshop.python.org/pypi/ProxyTypes>`_ wrote by Phillip J. Eby for a
-part of `PEAK <http://www.eby-sarna.com/mailman/listinfo/peak>`_.
+<http://cheeseshop.python.org/pypi/ProxyTypes>`_ wrote by Phillip J. Eby as
+part of `PEAK <http://www.eby-sarna.com/mailman/listinfo/peak>`_ for Python 2.
 
 The namespace was changed from ``peak.util.proxies`` to ``objproxies``. Other
 than that it should be a compatible replacement.
@@ -304,7 +304,7 @@ a ``@lazymethod`` replacement::
     >>> bool(lazyfile)
     True
 
-Advanced: Custom subclasses and mixins
+Advanced: custom subclasses and mixins
 **************************************
 
 In addition to all the concrete classes described above, there are also two

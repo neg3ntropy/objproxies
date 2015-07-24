@@ -165,8 +165,8 @@ class AbstractWrapper(AbstractProxy):
 
     def __setattr__(self, attr, val, osa=object.__setattr__):
         if (
-            attr == '__subject__'
-            or hasattr(type(self), attr) and not attr.startswith('__')
+            attr == '__subject__' or
+            hasattr(type(self), attr) and not attr.startswith('__')
         ):
             osa(self, attr, val)
         else:
@@ -174,8 +174,8 @@ class AbstractWrapper(AbstractProxy):
 
     def __delattr__(self, attr, oda=object.__delattr__):
         if (
-            attr == '__subject__'
-            or hasattr(type(self), attr) and not attr.startswith('__')
+            attr == '__subject__' or
+            hasattr(type(self), attr) and not attr.startswith('__')
         ):
             oda(self, attr)
         else:
@@ -193,12 +193,14 @@ class CallbackWrapper(CallbackProxy, AbstractWrapper):
 class LazyWrapper(LazyProxy, AbstractWrapper):
     __slots__ = ()
 
+
 def lazymethod(method):
     """
     Decorator for overriding methods on LazyWrapper classes, that fill in until
     lazy initialization.
     """
     import functools
+
     @functools.wraps(method)
     def wrapper(self, *args, **kwargs):
         try:
