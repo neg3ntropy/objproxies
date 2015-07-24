@@ -5,7 +5,7 @@ from os.path import join, dirname
 
 setuptools.setup(
     name="objproxies",
-    version="0.9.3",
+    version="0.9.4",
     description="General purpose proxy and wrapper types",
     long_description=open(join(dirname(__file__), 'README.rst')).read(),
     url="http://github.com/soulrebel/objproxies",
@@ -16,7 +16,7 @@ setuptools.setup(
     py_modules=['objproxies'],
     keywords='proxy pattern lazy wrapper',
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: Zope Public License',
         'License :: OSI Approved :: Python Software Foundation License',
